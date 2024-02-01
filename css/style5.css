@@ -38,3 +38,23 @@
     bottom: 15px;
     right: 15px;
 }
+.favoris-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100px;
+}
+
+.favoris-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.favoris-btn.favori {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    color: #000000;
+}

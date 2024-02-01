@@ -18,13 +18,33 @@ function afficherCitations() {
         newAuteur.classList.add("auteur");
         newAuteur.textContent = auteur;
 
+        const favorisBtn = document.createElement("button");
+        favorisBtn.textContent = "Favoris";
+        favorisBtn.classList.add("favoris-btn");
+
         newElement.appendChild(newCitation);
         newElement.appendChild(newAuteur);
+        newElement.appendChild(favorisBtn);
         tabQuotes.appendChild(newElement);
+
+        // Gestionnaire d'événements pour le bouton de favoris
+        favorisBtn.addEventListener("click", function() {
+            if (favorisBtn.classList.contains("favori")) {
+                favorisBtn.classList.remove("favori");
+        /* Supprimer du stockage local
+                 removeFavorite(auteur);
+            } else {
+                favorisBtn.classList.add("favori");
+        // Ajouter au stockage local
+                addFavorite(auteur, citation);*/
+            }
+        })    
     }
 }
+                
 
 afficherCitations(); // Appel de la fonction pour afficher toutes les citations
+
 
 /*
 let elements = document.querySelectorAll("#tabQuotes");
