@@ -1,15 +1,42 @@
-console.log("test");
 
+let elements = document.querySelectorAll(".tabElement"); // Utilisation de querySelectorAll pour sélectionner tous les éléments avec la classe "tabElement"
+const tabQuotes = document.getElementById("wrapper"); // Correction de la syntaxe de getElementById
+
+// Fonction pour afficher toutes les citations
+function afficherCitations() {
+    for (let auteur in quotes) { // Parcourt chaque auteur dans l'objet quotes
+        const citation = quotes[auteur]; // Récupère la citation pour cet auteur
+
+        const newElement = document.createElement("div"); // Création d'un nouvel élément div
+        newElement.classList.add("tabElement"); // Ajout de la classe "tabElement" à l'élément créé
+
+        const newCitation = document.createElement("div");
+        newCitation.classList.add("citation");
+        newCitation.textContent = citation;
+
+        const newAuteur = document.createElement("div");
+        newAuteur.classList.add("auteur");
+        newAuteur.textContent = auteur;
+
+        newElement.appendChild(newCitation);
+        newElement.appendChild(newAuteur);
+        tabQuotes.appendChild(newElement);
+    }
+}
+
+afficherCitations(); // Appel de la fonction pour afficher toutes les citations
+
+/*
 let elements = document.querySelectorAll("#tabQuotes");
-let element = document.querySelector(".tabElement");
+let element = document.querySelectorAll(".tabElement");
 let auteur = document.querySelector(".auteur");
 let citation = document.querySelector(".citation");
-const tabQuotes = document.querySelector("#wrapper");
+const tabQuotes = document.getElementById("wrapper");
 
 /*pour chaque paire clé/valeur appelée dans la fonction forEach
 cloner "tabElement" avec nouvel auteur et nouvelle citation à chaque fois
 */
-
+/*
 console.log(quotes);
 console.log(elements);
 
@@ -18,38 +45,27 @@ console.log(elements);
 const premiereCitation = quotes["Serge Karamazov"];
 const premierAuteur = "Serge Karamazov";
 
-const elementPc = document.querySelector(".citation");
-const elementPa = document.querySelector(".auteur");
+citation.textContent = premiereCitation;
+auteur.textContent = premierAuteur;
 
-elementPc.textContent = premiereCitation;
-elementPa.textContent = premierAuteur;
+//on applique une fonction de création des autres éléments du tableau quotes
 
-
-    for (auteur in quotes) {
+    for (let auteur in quotes) {
         citation = quotes[auteur];
-        document.write(auteur + " = " + citation + '<br>');
-       
+               
         function afficherCitations() {
 
-            const newElementP = document.createElement("p").clodeNode();
-            newElementP.textContent = citation;
-            citation.appendChild(newElementP);
-        }}    
-
-            /*
-          
-            const newAuteur = newElement.querySelector(".auteur");
+            const newElement = element.clodeNode(true);
             const newCitation = newElement.querySelector(".citation");
-            
+            const newAuteur = newElement.querySelector(".auteur");
 
             newCitation.textContent = citation;
             newAuteur.textContent = auteur;
 
-            newElement.appendChild(newAuteur);
-            newElement.appendChild(newCitation);
+            tabElement.appendChild(newCitation);
+            tabElement.appendChild(newAuteur);
+            tabQuotes.appendChild(newElement);
+        }}    
 
-            tabElement.appendChild(newElement);
-        }
-    }
-    */
-       
+    
+*/

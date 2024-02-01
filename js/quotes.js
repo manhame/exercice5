@@ -6,6 +6,3 @@ let quotes = {
     "Moulinier" : "L'habit ne fait pas le moine",
     "Orson Welles" : "C'est du vol et du plagiat.J'aime pas trop les voleurs et..."
 };
-//on accède au contenu par les clés : ex : let auteur1 = quotes["Serge Karamazov"]
-console.log("TEST");
-console.log(quotes);
