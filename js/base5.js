@@ -2,90 +2,61 @@
 let elements = document.querySelectorAll(".tabElement"); // Utilisation de querySelectorAll pour sélectionner tous les éléments avec la classe "tabElement"
 const tabQuotes = document.getElementById("wrapper"); // Correction de la syntaxe de getElementById
 
-// Fonction pour afficher toutes les citations
-function afficherCitations() {
-    for (let auteur in quotes) { // Parcourt chaque auteur dans l'objet quotes
-        const citation = quotes[auteur]; // Récupère la citation pour cet auteur
+//Initializations
+let favoriteQuotes = JSON.parse(localStorage.getItem('favoriteQuotes')) || [];//stocke les citations favorites dans le "localStorage"
 
+// Fonction pour afficher toutes les citations avec option "favoris" cliquables
+function afficherCitations() {
+    quotes.forEach((quote) => {   // foreach($quotes as $quote)
+        //console.log(quotes);// affiche bien le tableau objet "de type associatif"
+    
         const newElement = document.createElement("div"); // Création d'un nouvel élément div
         newElement.classList.add("tabElement"); // Ajout de la classe "tabElement" à l'élément créé
-
-        const newCitation = document.createElement("div");
+    
+        const newCitation = document.createElement("div");//idem
         newCitation.classList.add("citation");
-        newCitation.textContent = citation;
-
-        const newAuteur = document.createElement("div");
+        newCitation.textContent = `${quote.citation}`;//on ajoute le texte de chaque citation
+    
+        const newAuteur = document.createElement("div");//idem
         newAuteur.classList.add("auteur");
-        newAuteur.textContent = auteur;
+        newAuteur.textContent = `${quote.auteur}`;//on ajoute le nom de chaque auteur
 
-        const favorisBtn = document.createElement("button");
+        const favorisBtn = document.createElement("button");//idem
         favorisBtn.textContent = "Favoris";
         favorisBtn.classList.add("favoris-btn");
-
+        favorisBtn.setAttribute("data-id", quote.id);//on affecte à chaque favori un "id" de "quote"
+        let classBtn
+        if (favoriteQuotes.includes(quote.id)) { 
+           classBtn = "favori"
+        }
+        favorisBtn.classList.add(classBtn);
+    
         newElement.appendChild(newCitation);
         newElement.appendChild(newAuteur);
         newElement.appendChild(favorisBtn);
         tabQuotes.appendChild(newElement);
 
-        // Gestionnaire d'événements pour le bouton de favoris
-        favorisBtn.addEventListener("click", function() {
-            if (favorisBtn.classList.contains("favori")) {
-                favorisBtn.classList.remove("favori");
-        /* Supprimer du stockage local
-                 removeFavorite(auteur);
+        favorisBtn.addEventListener("click", () => toggleFavorite(quote.id));//quand on clique sur "favoris" on execute la fonction ci-dessous
+        
+    });
+}    
+        afficherCitations(); // Appel de la fonction pour afficher toutes les citations
+
+        function toggleFavorite(quoteId) {      //on affecte une variable peu importe le nom, valable que dans la fonction
+
+            const btnFav = document.querySelector(`.favoris-btn[data-id='${quoteId}']`);//on declare une variable qui représente l'ensemble des citations favorites
+
+            
+            if (favoriteQuotes.includes(quoteId)) {     //si les citations favorites sont inclues (cliquées)
+                favoriteQuotes = favoriteQuotes.filter(id => id !== quoteId);  //alors on les retire
+                //Remove the quote from favorites
+                btnFav.classList.remove("favori");
+        
             } else {
-                favorisBtn.classList.add("favori");
-        // Ajouter au stockage local
-                addFavorite(auteur, citation);*/
+                favoriteQuotes.push(quoteId); //sinon on les pousse dedans
+                // Add the quote to favorites
+                btnFav.classList.add("favori");
             }
-        })    
-    }
-}
-                
 
-afficherCitations(); // Appel de la fonction pour afficher toutes les citations
-
-
-/*
-let elements = document.querySelectorAll("#tabQuotes");
-let element = document.querySelectorAll(".tabElement");
-let auteur = document.querySelector(".auteur");
-let citation = document.querySelector(".citation");
-const tabQuotes = document.getElementById("wrapper");
-
-/*pour chaque paire clé/valeur appelée dans la fonction forEach
-cloner "tabElement" avec nouvel auteur et nouvelle citation à chaque fois
-*/
-/*
-console.log(quotes);
-console.log(elements);
-
-//remplacer contenu de l'élément "proto" par le 1er élément du tableau "quotes"
-
-const premiereCitation = quotes["Serge Karamazov"];
-const premierAuteur = "Serge Karamazov";
-
-citation.textContent = premiereCitation;
-auteur.textContent = premierAuteur;
-
-//on applique une fonction de création des autres éléments du tableau quotes
-
-    for (let auteur in quotes) {
-        citation = quotes[auteur];
-               
-        function afficherCitations() {
-
-            const newElement = element.clodeNode(true);
-            const newCitation = newElement.querySelector(".citation");
-            const newAuteur = newElement.querySelector(".auteur");
-
-            newCitation.textContent = citation;
-            newAuteur.textContent = auteur;
-
-            tabElement.appendChild(newCitation);
-            tabElement.appendChild(newAuteur);
-            tabQuotes.appendChild(newElement);
-        }}    
-
-    
-*/
+            localStorage.setItem('favoriteQuotes', JSON.stringify(favoriteQuotes));//fonction qui stocke les favoris
+        }        
