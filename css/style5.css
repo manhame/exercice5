@@ -53,7 +53,7 @@
     color: #ffffff;
 }
 
-.favoris-btn.favori {
+.favoris-btn.favori {   /*on ajoute .favori la classe favori à la classe.favori-btn ce qui a pour effet d'écraser la précédente*/
     background-color: #ffcc00;
     border-color: #ffcc00;
     color: #000000;

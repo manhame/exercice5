@@ -3,7 +3,7 @@ let elements = document.querySelectorAll(".tabElement"); // Utilisation de query
 const tabQuotes = document.getElementById("wrapper"); // Correction de la syntaxe de getElementById
 
 //Initializations
-let favoriteQuotes = JSON.parse(localStorage.getItem('favoriteQuotes')) || [];//stocke les citations favorites dans le "localStorage"
+let favoriteQuotes = JSON.parse(localStorage.getItem('favoriteQuotes')) || [];//on déclare une variable objet qui récupère les citations du localstorage ou rien []
 
 // Fonction pour afficher toutes les citations avec option "favoris" cliquables
 function afficherCitations() {
@@ -24,12 +24,12 @@ function afficherCitations() {
         const favorisBtn = document.createElement("button");//idem
         favorisBtn.textContent = "Favoris";
         favorisBtn.classList.add("favoris-btn");
-        favorisBtn.setAttribute("data-id", quote.id);//on affecte à chaque favori un "id" de "quote"
-        let classBtn
+        favorisBtn.setAttribute("data-id", quote.id);//on affecte au bouton favori un attribut de nom "data-id" et de valeur quote.id (index de numérotation des citations)
+        let classBtn //on declare une variable qui représente la classe du bouton quand une citation est stockée dans les favoris
         if (favoriteQuotes.includes(quote.id)) { 
            classBtn = "favori"
         }
-        favorisBtn.classList.add(classBtn);
+        favorisBtn.classList.add(classBtn);//on ajoute cette classe (ici variable déclarée) au bouton
     
         newElement.appendChild(newCitation);
         newElement.appendChild(newAuteur);
